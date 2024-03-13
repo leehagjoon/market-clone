@@ -5,7 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
 import sqlite3
 
-con = sqlite3.connect('db.db', check_same_thread=False)
+con = sqlite3.connect('market.db', check_same_thread=False)
 cur = con.cursor()
 
 app = FastAPI()
@@ -55,8 +55,15 @@ async def get_image(item_id):
     return Response(content=bytes.fromhex(image_bytes), media_type='image/*')
 
 @app.post('/signup')
-def signup(id:Annotated[str,Form()],password:Annotated[str,Form()]):
-    print(id,password)
+def signup(id:Annotated[str,Form()],
+           password:Annotated[str,Form()],
+           name:Annotated[str,Form()],
+           email:Annotated[str,Form()]):
+    cur.execute(f"""
+                INSERT INTO users(id,name,email,password)
+                VALUES('{id}','{name}','{email}','{password}')
+                """)
+    con.commit()
     return '200'
 
 app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
