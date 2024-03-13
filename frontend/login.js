@@ -16,23 +16,6 @@ const handleSubmit = async (event) => {
     localStorage.setItem("token", accessToken);
     window.location.pathname = "/";
   }
-
-  // //   모든 아이템 리스트 조회
-  // console.log(accessToken);
-  // const res2 = await fetch("/items", {
-  //   headers: {
-  //     Authorization: "Bearer " + accessToken,
-  //   },
-  // });
-  // const data2 = await res2.json();
-  // console.log(data2);
-
-  //   if (res.status === 200) {
-  //     alert("로그인에 성공했습니다!");
-  //     window.location.pathname = "/";
-  //   } else if (res.status === 401) {
-  //     alert("id 혹은 password가 틀렸습니다.");
-  //   }
 };
 
 form.addEventListener("submit", handleSubmit);
