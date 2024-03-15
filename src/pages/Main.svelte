@@ -2,6 +2,7 @@
   import Footer from "../components/Footer.svelte";
   import { getDatabase, ref, onValue} from "firebase/database";
   import { onMount } from "svelte"
+  
     
     let hour = new Date().getHours();
     let min = new Date().getMinutes();
